@@ -7,17 +7,18 @@ export const ConverterComponent = () => {
   const {
     fromCurrency,
     toCurrency,
-    setFromCurrency,
+    setFormCurrency,
     setToCurrency,
     toAmount,
     fromAmount,
     handleFromAmountChange,
     handleToAmountChange,
   } = useContext(CurrentOptionContext);
+
   return (
     <div className={cl.ConverterComponent}>
       <InputSelect
-        onChangeCurrency={(e) => setFromCurrency(e.target.value)}
+        onChangeCurrency={(e) => setFormCurrency(e.target.value)}
         selectedCurrency={fromCurrency}
         amount={fromAmount}
         onChangeAmount={handleFromAmountChange}

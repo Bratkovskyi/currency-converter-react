@@ -1,6 +1,7 @@
 .InputSelect {
-    width: 385px;
+    width: 310px;
     display: flex;
     justify-content: space-between;
-    margin:10px 20px;
+    margin:10px 0;
+    padding: 0 20px;
 } 

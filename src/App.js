@@ -4,6 +4,7 @@ import "./App.css";
 import { Header } from "./components/Header/Header";
 import { CurrentOptionContext } from "./context";
 import { CurrencyConverter } from "./pages/CurrencyConverter/CurrencyConverter";
+import { Loader } from "./UI/Loader/Loader";
 
 function App() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
@@ -12,17 +13,21 @@ function App() {
   const [exchangeRate, setExchangeRate] = useState();
   const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
+  const [USDtoUAH, setUSDtoUAH] = useState(0);
+  const [EURtoUAH, setEURtoUAH] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   let toAmount, fromAmount;
   if (amountInFromCurrency) {
     fromAmount = amount;
-    toAmount = amount * exchangeRate;
+    toAmount = (amount * exchangeRate).toFixed(6);
   } else {
     toAmount = amount;
-    fromAmount = amount / exchangeRate;
+    fromAmount = (amount / exchangeRate).toFixed(6);
   }
 
   useEffect(() => {
+    setIsLoading(true)
     fetch(BASE_URL, requestOptions)
       .then((response) => response.json())
       .then((data) => {
@@ -31,19 +36,24 @@ function App() {
         setFormCurrency(data.base);
         setToCurrency(firstCurrency);
         setExchangeRate(data.rates[firstCurrency]);
+        setUSDtoUAH((data.rates.UAH / data.rates.USD).toFixed(6));
+        setEURtoUAH(data.rates.UAH);
+        setIsLoading(false)
       })
       .catch((error) => console.log("error", error));
   }, []);
 
   useEffect(() => {
     if (formCurrency != null && toCurrency != null) {
-      fetch(`https://api.apilayer.com/exchangerates_data/latest?base=${formCurrency}&symbols=${toCurrency}`, requestOptions)
-        .then(response => response.json())
-        .then(data => setExchangeRate(data.rates[toCurrency]));
-        // .then(data => console.log(data))
+      fetch(
+        `https://api.apilayer.com/exchangerates_data/latest?base=${formCurrency}&symbols=${toCurrency}`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((data) => setExchangeRate(data.rates[toCurrency]));
     }
   }, [formCurrency, toCurrency]);
-  
+
   function handleFromAmountChange(e) {
     setAmount(e.target.value);
     setAmountInFromCurrency(true);
@@ -68,8 +78,11 @@ function App() {
       }}
     >
       <div className="App">
-        <Header />
-        <CurrencyConverter />
+        <Header USDtoUAH={USDtoUAH} EURtoUAH={EURtoUAH} />
+        {isLoading
+        ? <Loader/>
+        : <CurrencyConverter />
+        }
       </div>
     </CurrentOptionContext.Provider>
   );

@@ -1,6 +1,19 @@
 .Header {
-    background-color: blueviolet;
+    box-shadow: 1px 1px 1px rgba(0,0,0, 0.3);;
+    background-color:rgba(0,0,0, 0.4);
+    color: #fff;
     height: 80px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+.Header h3 {
+ margin: 5px;       
+}
+@media screen and (min-width: 350px) {
+    .Header{
+        font-size: 12px;
+    }
+    
 }

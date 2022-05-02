@@ -5,3 +5,16 @@
   justify-content: center;
   align-items: center;
 }
+.container {
+  align-items: center;
+  height: 370px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+}
+.container h1 {
+  margin-top: 0;
+}

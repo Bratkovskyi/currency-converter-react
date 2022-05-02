@@ -1,13 +1,14 @@
 :root {
-  --bg-color: linear-gradient(35deg, red, purple);
+  --bg-color: linear-gradient(33deg, rgb(181 180 214)-100%, rgb(7 37 84) 93%);
+  /* --bg-color: linear-gradient(35deg, red, purple); */
   --glass: rgba(255, 255, 255, 0.2);
   --glass-icon: rgba(255, 255, 255, 0.3);
   --gradient: linear-gradient(35deg, red, purple);
-  --option: #320a28; 
+  --option: #320a28;
 }
 .App {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg-color)
+  background: var(--bg-color);
 }
