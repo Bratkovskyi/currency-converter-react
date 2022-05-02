@@ -1,0 +1,23 @@
+.Input {
+  appearance: none;
+  border: 0;
+  outline: 0;
+  height: 40px;
+  width: 200px;
+  border-radius: 0.25em;
+  padding: 0px 15px;
+  background-color: var(--glass-icon);
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+}
+/* For Chrome */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+/* For Mozilla */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  opacity: 1;
+  margin: 0;
+}
